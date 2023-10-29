@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: userprofile_service
+
+server:
+  port: 0
+  server-header: Web
+  error:
+    whitelabel:
+      enabled: false
