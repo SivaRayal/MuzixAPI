@@ -1,0 +1,24 @@
+package com.ness.muzix.LastFMService.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+import lombok.Data;
+
+@Configuration
+@Data
+public class MuzixAppConfig {
+	
+	@Value("lastfm.apikey")
+	private String lastfmApiKey;
+	
+	@Value("lastfm.track.search")
+	private String trackSearchURL;
+	
+	@Value("lastfm.artist.search")
+	private String artistSearchURL;
+	
+	@Value("lastfm.recomendedTracks")
+	private String recommendedTracksURL;
+	
+}
