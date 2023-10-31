@@ -3,6 +3,7 @@ package com.ness.muzix.WishListService.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ness.muzix.WishListService.exception.WishListException;
 import com.ness.muzix.WishListService.model.WhislistDTO;
@@ -12,6 +13,7 @@ import com.ness.muzix.WishListService.service.WishListService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service("WishListService")
 public class WishListServiceImpl implements WishListService{
     @Autowired
     FavoritesRepository favoritesRepo;
