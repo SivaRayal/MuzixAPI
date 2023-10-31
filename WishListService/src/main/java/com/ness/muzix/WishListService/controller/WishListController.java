@@ -40,7 +40,7 @@ public class WishListController {
             for (ObjectError res : result.getFieldErrors()) {
                 errors.add(res.getDefaultMessage());
             }
-            throw new WishListException(errors.toString());
+            throw new WishListException("updateFavorites failed due to invalid request");
         }
 		return new ResponseEntity<>(wishlistService.addToFavorites(requestWishlist).get(),HttpStatus.OK);
 	}
@@ -53,7 +53,7 @@ public class WishListController {
             for (ObjectError res : result.getFieldErrors()) {
                 errors.add(res.getDefaultMessage());
             }
-            throw new WishListException(errors.toString());
+            throw new WishListException("removeFavorites failed due to bad request");
         }
 		wishlistService.removeFromFavorites(requestWishlist);
 		return new ResponseEntity<>("Tracks removed from favourites list",HttpStatus.OK);

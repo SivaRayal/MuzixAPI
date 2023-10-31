@@ -9,14 +9,14 @@ import lombok.Data;
 @Data
 public class MuzixAppConfig {
 	
-	@Value("lastfm.apikey")
-	private String lastfmApiKey;
-	
 	@Value("lastfm.track.search")
 	private String trackSearchURL;
 	
 	@Value("lastfm.artist.search")
 	private String artistSearchURL;
+	
+	@Value("lastfm.recomendedTags")
+	private String recommendedTagsURL;
 	
 	@Value("lastfm.recomendedTracks")
 	private String recommendedTracksURL;
