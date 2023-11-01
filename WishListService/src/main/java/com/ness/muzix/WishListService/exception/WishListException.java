@@ -1,7 +1,7 @@
 package com.ness.muzix.WishListService.exception;
 
 public class WishListException extends RuntimeException{
-	WishListException(String message){
+	public WishListException(String message){
 		super(message);
 	}
 }

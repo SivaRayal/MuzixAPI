@@ -19,7 +19,7 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator apiRoutes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route("whishlist_route",route->route.path("/api/v1/whishlist/**").uri("lb://whishlist-service"))
+				.route("whishlist_route",route->route.path("/wishlist/**").uri("lb://whishlist-service"))
 				.build();
 	}
 
