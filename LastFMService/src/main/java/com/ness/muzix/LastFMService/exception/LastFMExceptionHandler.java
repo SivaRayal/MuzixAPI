@@ -11,7 +11,7 @@ public class LastFMExceptionHandler {
 	
 	@ExceptionHandler(value={LastFMServiceException.class})
 	public ResponseEntity<?> handleLastFMServiceException(LastFMServiceException exception){
-		return new ResponseEntity<>(exception,new HttpHeaders(),HttpStatus.CONFLICT);
+		return new ResponseEntity<>(exception.getLocalizedMessage(),new HttpHeaders(),HttpStatus.CONFLICT);
 	}
 
 }

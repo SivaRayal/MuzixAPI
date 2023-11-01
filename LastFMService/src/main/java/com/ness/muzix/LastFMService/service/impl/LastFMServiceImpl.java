@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,11 +16,14 @@ import com.ness.muzix.LastFMService.model.TagsResponse;
 import com.ness.muzix.LastFMService.model.TitleSearchResponse;
 import com.ness.muzix.LastFMService.service.LastFMService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service("LastFMService")
 public class LastFMServiceImpl implements LastFMService{
 	
-	@Autowired
-	RestTemplate restTemplate;
+	// @Autowired
+	RestTemplate restTemplate = new RestTemplate();
 	
 	@Autowired
 	MuzixAppConfig appConfig;
@@ -29,11 +31,15 @@ public class LastFMServiceImpl implements LastFMService{
 	@Override
 	public TitleSearchResponse titleSearch(String trackName) {
 		final String url=appConfig.getTrackSearchURL()+trackName+MuzixAppConstants.LASTFM_API_KEY_FORMAT;
+		log.info("URL - "+url);
 		try{
-			TitleSearchResponse titleSearchResponse = restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<>(null,new HttpHeaders()), TitleSearchResponse.class).getBody();
+			TitleSearchResponse titleSearchResponse = restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<>(null,null), TitleSearchResponse.class).getBody();
 			return titleSearchResponse;
 		}catch(Exception e) {
+			e.printStackTrace();
+			log.info(e.toString());
 			throw new LastFMServiceException("Title search api failed from last-fm.com");
+			
 		}
 		
 	}
@@ -52,8 +58,9 @@ public class LastFMServiceImpl implements LastFMService{
 	@Override
 	public TagsResponse getTopTags() {
 		final String url=appConfig.getRecommendedTagsURL()+MuzixAppConstants.LASTFM_API_KEY_FORMAT;
+		log.info("URL - "+url);
 		try{
-			TagsResponse topTagsResponse = restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<>(null,new HttpHeaders()), TagsResponse.class).getBody();
+			TagsResponse topTagsResponse = restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<>(null,null), TagsResponse.class).getBody();
 			return topTagsResponse;
 		}catch(Exception e) {
 			throw new LastFMServiceException("Top Tags api failed from last-fm.com");

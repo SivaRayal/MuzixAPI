@@ -9,16 +9,16 @@ import lombok.Data;
 @Data
 public class MuzixAppConfig {
 	
-	@Value("lastfm.track.search")
+	@Value("${lastfm.track.search}")
 	private String trackSearchURL;
 	
-	@Value("lastfm.artist.search")
+	@Value("${lastfm.artist.search}")
 	private String artistSearchURL;
 	
-	@Value("lastfm.recomendedTags")
+	@Value("${lastfm.recomendedTags}")
 	private String recommendedTagsURL;
 	
-	@Value("lastfm.recomendedTracks")
+	@Value("${lastfm.recomendedTracks}")
 	private String recommendedTracksURL;
 	
 }

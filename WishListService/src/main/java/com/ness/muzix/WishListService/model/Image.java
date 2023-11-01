@@ -1,7 +1,6 @@
-package com.ness.muzix.LastFMService.model;
+package com.ness.muzix.WishListService.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +9,10 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Trackmatches implements Serializable{
+public class Image implements Serializable{
 	private static final long serialVersionID=5L;
-	@JsonProperty("track")
-	private ArrayList<TitleTrack> track;
+	@JsonProperty("#text")
+	private String text;
+	@JsonProperty("size")
+	private String size;
 }

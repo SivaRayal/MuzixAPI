@@ -1,5 +1,6 @@
 package com.ness.muzix.WishListService.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ness.muzix.WishListService.entities.WhislistDTO;
 import com.ness.muzix.WishListService.exception.WishListException;
-import com.ness.muzix.WishListService.model.WhislistDTO;
+import com.ness.muzix.WishListService.model.WhislistRequest;
 import com.ness.muzix.WishListService.service.WishListService;
 
 import java.util.List;
@@ -27,13 +29,16 @@ public class WishListController {
 	@Autowired
 	WishListService wishlistService;
 	
+	@Autowired
+	ModelMapper modelMapper;
+
 	@GetMapping("/getFavorites")
 	public ResponseEntity<?> getFavorites(@RequestParam String userEmail){
 		return new ResponseEntity<>(wishlistService.getFavourites(userEmail),HttpStatus.OK);
 	}
 	
 	@PostMapping("/updateFavorites")
-	public ResponseEntity<WhislistDTO> updateFavorites(@Validated @RequestBody WhislistDTO requestWishlist, BindingResult result){
+	public ResponseEntity<WhislistRequest> updateFavorites(@Validated @RequestBody WhislistRequest requestWishlist, BindingResult result){
 		//Bindning Error handle
          if (result.hasErrors()) {
             List<String> errors = new ArrayList<>();
@@ -42,11 +47,13 @@ public class WishListController {
             }
             throw new WishListException("updateFavorites failed due to invalid request");
         }
-		return new ResponseEntity<>(wishlistService.addToFavorites(requestWishlist).get(),HttpStatus.OK);
+		WhislistDTO wishListDTO=modelMapper.map(requestWishlist, WhislistDTO.class);
+		WhislistRequest wishListResp= modelMapper.map(wishlistService.addToFavorites(wishListDTO).get(),WhislistRequest.class);
+		return new ResponseEntity<>(wishListResp,HttpStatus.OK);
 	}
 
 	@DeleteMapping("/removeFavorites")
-	public ResponseEntity<?> removeFavorites(@Validated @RequestBody WhislistDTO requestWishlist, BindingResult result){
+	public ResponseEntity<?> removeFavorites(@Validated @RequestBody WhislistRequest requestWishlist, BindingResult result){
 		//Bindning Error handle
          if (result.hasErrors()) {
             List<String> errors = new ArrayList<>();
@@ -55,7 +62,7 @@ public class WishListController {
             }
             throw new WishListException("removeFavorites failed due to bad request");
         }
-		wishlistService.removeFromFavorites(requestWishlist);
+		wishlistService.removeFromFavorites(modelMapper.map(requestWishlist, WhislistDTO.class) );
 		return new ResponseEntity<>("Tracks removed from favourites list",HttpStatus.OK);
 	}
 
