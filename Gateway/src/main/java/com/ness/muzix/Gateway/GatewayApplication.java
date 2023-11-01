@@ -20,6 +20,7 @@ public class GatewayApplication {
 	public RouteLocator apiRoutes(RouteLocatorBuilder builder){
 		return builder.routes()
 				.route("whishlist_route",route->route.path("/wishlist/**").uri("lb://whishlist-service"))
+				.route("lastFMService_route",route->route.path("/lastfm/**").uri("lb://lastfm-service"))
 				.build();
 	}
 
