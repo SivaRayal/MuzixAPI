@@ -21,7 +21,7 @@ public class MuzixSecurityConfig {
         .authorizeHttpRequests()
         .requestMatchers("/auth/**")
         .access((authentication, context) ->
-            new AuthorizationDecision(new IpAddressMatcher("localhost").matches(context.getRequest())));
+            new AuthorizationDecision(new IpAddressMatcher("127.0.0.1").matches(context.getRequest())));
         return http.build();
     }
 

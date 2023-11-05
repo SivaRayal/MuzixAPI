@@ -17,7 +17,6 @@ public class UserCredentailsDTO implements Serializable{
     public static final long serialVersionID=1L;
 
     @Id
-    @JsonProperty("UserEmail")
     @Column(name="USER_EMAIL")
     private String userEmail;
 

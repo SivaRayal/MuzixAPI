@@ -1,5 +1,6 @@
 package com.ness.muzix.AuthorizationService.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import com.ness.muzix.AuthorizationService.service.MuzixAuthenticationService;
 
 @RestController
 @RequestMapping("/auth")
+@Slf4j
 public class MuzixAuthenticationController {
     @Autowired
     PasswordEncoder encoder;
@@ -28,6 +30,7 @@ public class MuzixAuthenticationController {
         UserCredentails existingUser = authService.getUserByEmail(userCredits.getUserEmail());
         String token="";
         if(existingUser!=null && encoder.matches(userCredits.getPassword(), existingUser.getPassword())){
+            log.info("Started validating username pws");
             token=authService.authSuccess(userCredits.getUserEmail());
         }else{
             throw new AuthorizationException("User not found. Kindly register for new user login");

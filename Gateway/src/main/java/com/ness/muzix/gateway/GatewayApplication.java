@@ -1,4 +1,4 @@
-package com.ness.muzix.Gateway;
+package com.ness.muzix.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +21,7 @@ public class GatewayApplication {
 		return builder.routes()
 				.route("whishlist_route",route->route.path("/wishlist/**").uri("lb://whishlist-service"))
 				.route("lastFMService_route",route->route.path("/lastfm/**").uri("lb://lastfm-service"))
+				.route("auth_route",route->route.path("/auth/**").uri("lb://auth-service"))
 				.build();
 	}
 

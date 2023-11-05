@@ -8,8 +8,8 @@ import lombok.Data;
 @Component
 @Data
 public class MuzixAppConfigs {
-    @Value("token.expiration.time")
+    @Value("${token.expiration.time}")
     private String tokenExpTime;
-    @Value("token.secret")
+    @Value("${token.secret}")
     private String tokenSecret;
 }

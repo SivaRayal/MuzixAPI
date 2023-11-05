@@ -17,6 +17,5 @@ public class UserCredentails implements Serializable{
     private String userEmail;
 
     @JsonProperty("Password")
-    @NonNull
     private String password;
 }

@@ -1,4 +1,4 @@
-package com.ness.muzix.Gateway;
+package com.ness.muzix.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
