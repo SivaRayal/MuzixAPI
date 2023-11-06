@@ -29,9 +29,13 @@ public class MuzixAuthenticationController {
     public ResponseEntity<?> authenticate(@Validated @RequestBody UserCredentails userCredits){
         UserCredentails existingUser = authService.getUserByEmail(userCredits.getUserEmail());
         String token="";
-        if(existingUser!=null && encoder.matches(userCredits.getPassword(), existingUser.getPassword())){
-            log.info("Started validating username pws");
-            token=authService.authSuccess(userCredits.getUserEmail());
+        if(existingUser!=null){
+            if( encoder.matches(userCredits.getPassword(), existingUser.getPassword())) {
+                log.info("Started validating username pws");
+                token = authService.authSuccess(userCredits.getUserEmail());
+            }else{
+                throw new AuthorizationException("Invalid Password. Kindly retry with valid password or rest your password");
+            }
         }else{
             throw new AuthorizationException("User not found. Kindly register for new user login");
         }

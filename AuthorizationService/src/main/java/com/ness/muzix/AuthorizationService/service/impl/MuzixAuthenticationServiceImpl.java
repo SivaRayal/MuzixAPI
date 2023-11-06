@@ -34,7 +34,7 @@ public class MuzixAuthenticationServiceImpl implements MuzixAuthenticationServic
 
     @Override
     public UserCredentails getUserByEmail(String email) {
-        log.info("User credentails service start");
+        log.info("User credentails service start -"+email);
         Optional<UserCredentailsDTO> userCredentailsDTO =userRepo.findById(email);
         UserCredentails userCredits=null;
         if(userCredentailsDTO.isEmpty()){
@@ -44,7 +44,7 @@ public class MuzixAuthenticationServiceImpl implements MuzixAuthenticationServic
             log.info("User credentails mapping back");
             userCredits=modelMapper.map(userCredentailsDTO,UserCredentails.class);
         }
-        log.info("User credentails service start");
+        log.info("User credentails service end");
         return userCredits;
     }
 
