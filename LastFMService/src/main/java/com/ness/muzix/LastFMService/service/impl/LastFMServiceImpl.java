@@ -1,12 +1,13 @@
 package com.ness.muzix.LastFMService.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.ness.muzix.LastFMService.config.MuzixAppConfig;
 import com.ness.muzix.LastFMService.config.MuzixAppConstants;
 import com.ness.muzix.LastFMService.exception.LastFMServiceException;
@@ -21,6 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service("LastFMService")
 public class LastFMServiceImpl implements LastFMService{
+	
+	private static final Logger log = LoggerFactory.getLogger(LastFMServiceImpl.class);
+	
 	
 	// @Autowired
 	RestTemplate restTemplate = new RestTemplate();
