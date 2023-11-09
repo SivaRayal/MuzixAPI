@@ -2,15 +2,14 @@ package com.ness.muzix.UserProfileService.dto;
 
 public class UserProfileDto {
 	
-	private String username;
+	private String userEmail;
 	private String oldPassword;
 	private String newPassword;
-	
-	public String getUsername() {
-		return username;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String getOldPassword() {
 		return oldPassword;
@@ -26,8 +25,7 @@ public class UserProfileDto {
 	}
 	@Override
 	public String toString() {
-		return "UserProfileDto [username=" + username + ", oldPassword=" + oldPassword + ", newPassword=" + newPassword
-				+ "]";
+		return "UserProfileDto [userEmail=" + userEmail + ", oldPassword=" + oldPassword + ", newPassword="
+				+ newPassword + "]";
 	}
-	
 }

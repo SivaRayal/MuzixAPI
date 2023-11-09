@@ -8,12 +8,12 @@ public interface UserProfileService{
 	
 	public String addUserProfile(UserProfile userProfile) throws UserProfileException;
 	
-	public UserProfile getUserProfileByUsername(String username) throws UserProfileException;
+	public UserProfile getUserProfileByUserEmail(String userEmail) throws UserProfileException;
 	
-	public UserProfile loginProfile(String username, String password) throws UserProfileException;
+	public UserProfile loginProfile(String userEmail, String password) throws UserProfileException;
 	
-	public String changePassword(String username,String oldPassword, String newPassword) throws UserProfileException;
+	public String changePassword(String userEmail,String oldPassword, String newPassword) throws UserProfileException;
 	
-	public String forgetPassword(String username, String password) throws UserProfileException;
+	public String forgetPassword(String userEmail, String password) throws UserProfileException;
 	
 }

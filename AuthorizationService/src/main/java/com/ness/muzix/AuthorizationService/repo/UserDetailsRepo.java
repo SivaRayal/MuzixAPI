@@ -4,10 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ness.muzix.AuthorizationService.model.UserCredentailsDTO;
+import com.ness.muzix.AuthorizationService.model.UserProfile;
 
 @Repository
 @Transactional
-public interface UserDetailsRepo extends JpaRepository<UserCredentailsDTO,String>{
+public interface UserDetailsRepo extends JpaRepository<UserProfile,String>{
+	
+	UserProfile findByUserEmail(String userEmail);
     
 }

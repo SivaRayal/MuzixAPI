@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.ness.muzix.AuthorizationService.config.MuzixAppConfigs;
 import com.ness.muzix.AuthorizationService.exception.AuthorizationException;
-import com.ness.muzix.AuthorizationService.model.UserCredentails;
-import com.ness.muzix.AuthorizationService.model.UserCredentailsDTO;
+import com.ness.muzix.AuthorizationService.model.UserProfile;
+import com.ness.muzix.AuthorizationService.model.UserProfileDto;
 import com.ness.muzix.AuthorizationService.repo.UserDetailsRepo;
 import com.ness.muzix.AuthorizationService.service.MuzixAuthenticationService;
 
@@ -33,16 +33,16 @@ public class MuzixAuthenticationServiceImpl implements MuzixAuthenticationServic
     MuzixAppConfigs appConfig;
 
     @Override
-    public UserCredentails getUserByEmail(String email) {
+    public UserProfileDto getUserByEmail(String email) {
         log.info("User credentails service start -"+email);
-        Optional<UserCredentailsDTO> userCredentailsDTO =userRepo.findById(email);
-        UserCredentails userCredits=null;
+        Optional<UserProfile> userCredentailsDTO =userRepo.findById(email);
+        UserProfileDto userCredits=null;
         if(userCredentailsDTO.isEmpty()){
             log.info("User not found");
             throw new AuthorizationException("User not found. Register as a new user");
         }else{
             log.info("User credentails mapping back");
-            userCredits=modelMapper.map(userCredentailsDTO,UserCredentails.class);
+            userCredits=modelMapper.map(userCredentailsDTO,UserProfileDto.class);
         }
         log.info("User credentails service end");
         return userCredits;

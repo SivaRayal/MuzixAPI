@@ -12,13 +12,13 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface UserProfileRepository extends CrudRepository<UserProfile, Long> {
 
-	UserProfile findByUserName(String userName);
+	UserProfile findByUserEmail(String userEmail);
 
-	UserProfile findByUserNameAndPassword(String userName, String password);
+	UserProfile findByUserEmailAndPassword(String userEmail, String password);
 
 	@Transactional
 	@Modifying
-	@Query("update UserProfile set password=?2 where id=?1")
-	int updateUserProfile(Integer projectId, String password);
+	@Query("update UserProfile set password=?2 where userEmail=?1")
+	int updateUserProfile(String userEmail, String password);
 
 }

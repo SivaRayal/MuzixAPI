@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -14,18 +12,14 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "USER_PROFILE")
 public class UserProfile implements Serializable{
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
-	
-	@Column(name = "USERNAME", nullable = false)
-	private String userName;
+	@Column(name = "EMAIL", nullable = false)
+	private String userEmail;
 	
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
@@ -36,26 +30,15 @@ public class UserProfile implements Serializable{
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	
-	@Column(name = "EMAIL")
-	private String email;
-	
 	@Column(name = "CONTACT_NUMBER")
 	private String contactNumber;
 
-	public int getUserId() {
-		return userId;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public String getPassword() {
@@ -82,14 +65,6 @@ public class UserProfile implements Serializable{
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getContactNumber() {
 		return contactNumber;
 	}
@@ -100,10 +75,9 @@ public class UserProfile implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserProfile [userId=" + userId + ", userName=" + userName + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", contactNumber=" + contactNumber + "]";
+		return "UserProfile [userEmail=" + userEmail + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", contactNumber=" + contactNumber + "]";
 	}
 
-	
 	
 }

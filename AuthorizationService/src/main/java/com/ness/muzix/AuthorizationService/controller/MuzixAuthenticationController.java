@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ness.muzix.AuthorizationService.exception.AuthorizationException;
-import com.ness.muzix.AuthorizationService.model.UserCredentails;
+import com.ness.muzix.AuthorizationService.model.UserProfileDto;
 import com.ness.muzix.AuthorizationService.service.MuzixAuthenticationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +30,10 @@ public class MuzixAuthenticationController {
     @Autowired
     MuzixAuthenticationService authService;
     
+    
     @GetMapping("/validate")
-    public ResponseEntity<?> authenticate(@Validated @RequestBody UserCredentails userCredits){
-        UserCredentails existingUser = authService.getUserByEmail(userCredits.getUserEmail());
+    public ResponseEntity<?> authenticate(@Validated @RequestBody UserProfileDto userCredits){
+        UserProfileDto existingUser = authService.getUserByEmail(userCredits.getUserEmail());
         String token="";
         if(existingUser!=null){
             if( encoder.matches(userCredits.getPassword(), existingUser.getPassword())) {
@@ -46,4 +47,6 @@ public class MuzixAuthenticationController {
         }
         return new ResponseEntity<>(token,HttpStatus.OK);
     }
+    
+    
 }

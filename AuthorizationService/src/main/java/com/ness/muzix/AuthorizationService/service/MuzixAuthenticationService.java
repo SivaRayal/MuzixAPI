@@ -1,8 +1,8 @@
 package com.ness.muzix.AuthorizationService.service;
 
-import com.ness.muzix.AuthorizationService.model.UserCredentails;
+import com.ness.muzix.AuthorizationService.model.UserProfileDto;
 
 public interface MuzixAuthenticationService {
-    UserCredentails getUserByEmail(String email);
+	UserProfileDto getUserByEmail(String email);
     String authSuccess(String email);
 }
