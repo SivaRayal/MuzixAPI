@@ -9,7 +9,5 @@ import com.ness.muzix.AuthorizationService.model.UserProfile;
 @Repository
 @Transactional
 public interface UserDetailsRepo extends JpaRepository<UserProfile,String>{
-	
-	UserProfile findByUserEmail(String userEmail);
-    
+
 }

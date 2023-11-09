@@ -20,10 +20,10 @@ public class UserProfile implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "EMAIL")
 	private String userEmail;
 	
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD")
 	private String password;
 	
 	@Column(name = "FIRST_NAME")

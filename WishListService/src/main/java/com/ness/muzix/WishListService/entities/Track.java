@@ -15,5 +15,5 @@ public class Track implements Serializable{
 	private String trackName;
 	private String artist;
 	private String url;
-	private ArrayList<Image> image;
+	private String image;
 }

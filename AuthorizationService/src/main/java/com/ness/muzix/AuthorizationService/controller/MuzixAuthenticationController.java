@@ -1,5 +1,7 @@
 package com.ness.muzix.AuthorizationService.controller;
 
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ness.muzix.AuthorizationService.exception.AuthorizationException;
 import com.ness.muzix.AuthorizationService.model.UserProfileDto;
@@ -47,6 +46,11 @@ public class MuzixAuthenticationController {
         }
         return new ResponseEntity<>(token,HttpStatus.OK);
     }
-    
+
+    @GetMapping("/getUserFromToken/{token}")
+    public ResponseEntity<?> getUserFromToken(@PathVariable String token){
+        String userEmail = Jwts.parser().setSigningKey("team05").parseClaimsJws(token).getBody().getSubject();
+        return new ResponseEntity<>(userEmail,HttpStatus.OK);
+    }
     
 }

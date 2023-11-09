@@ -19,5 +19,5 @@ public class Track implements Serializable{
 	@JsonProperty("url")
 	private String url;
 	@JsonProperty("image")
-	private ArrayList<Image> image;
+	private String image;
 }

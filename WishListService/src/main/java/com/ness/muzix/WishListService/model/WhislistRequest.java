@@ -21,5 +21,4 @@ public class WhislistRequest implements Serializable{
 	private String email;
 	@JsonProperty("tracks")
 	private List<Track> tracks;
-	
 }

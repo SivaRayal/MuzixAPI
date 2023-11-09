@@ -25,8 +25,8 @@ public class GatewayApplication {
 		return builder.routes()
 				.route("whishlist_route",route->route.path("/wishlist/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://whishlist-service"))
 				.route("lastFMService_route",route->route.path("/lastfm/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://lastfm-service"))
+				.route("userProfile_route", route->route.path("/userProfile/**").uri("lb://userprofile-service"))
 				.route("auth_route",route->route.path("/auth/**").uri("lb://auth-service"))
-				.route("userProfile_route", route->route.path("/userProfile/**").uri("lb://userprofileservice"))
 				.build();
 	}
 
