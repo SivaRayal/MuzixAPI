@@ -40,11 +40,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 			userProfile.setPassword(encoder.encode(userProfile.getPassword()));
 		}
 		Optional<UserProfile> exists =  userProfileRepository.findById(userProfile.getUserEmail());
-		if(exists.isEmpty()) {
+		if(!exists.isEmpty()) {
 			throw new UserProfileException(HttpStatus.NOT_ACCEPTABLE.value(), "User already registered");
 		}
 		try {
-			UserProfile response = userProfileRepository.save(modelMapper.map(userProfile,UserProfile.class));
+			UserProfile newUser=modelMapper.map(userProfile,UserProfile.class);
+			newUser.setPassword(encoder.encode(newUser.getPassword()));
+			UserProfile response = userProfileRepository.save(newUser);
 			LOG.info("UserProfileServiceImpl.register API Resposne -> "+ response.toString());
 		}catch (Exception e) {
 			throw new UserProfileException(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());

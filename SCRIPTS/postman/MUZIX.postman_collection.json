@@ -83,18 +83,106 @@
 								}
 							},
 							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "UserProfile",
+			"item": [
+				{
+					"name": "Direct",
+					"item": []
+				},
+				{
+					"name": "Gateway",
+					"item": [
+						{
+							"name": "GetUserProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE4MTg0LCJpYXQiOjE2OTk2MTUxODR9.8GHve4JrIzhFLPXt1DM8XH45eDTWr0jZAA1xnDYv0JiY5yWwshTIRxb9bWU4FRkkU2Q8Drvq7y9dn3c8DAZW_w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8800/userProfile/getUserProfile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8800",
+									"path": [
+										"userProfile",
+										"getUserProfile"
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"name": "getUser",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"name": "UpdateProfile",
 							"request": {
-								"method": "GET",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8800/userProfile/updateUserProfile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8800",
+									"path": [
+										"userProfile",
+										"updateUserProfile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RegisterUser",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"UserEmail\":\"kuruva.siva8055@gmail.com\",\r\n    \"Password\":\"siva141\"\r\n}",
+									"raw": "{\n    \"Password\": \"vishwa123\",\n    \"FirstName\": \"Gobinathan\",\n    \"LastName\": \"Vishwanathan\",\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\n    \"ContactNumber\": \"8899223344\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -102,16 +190,75 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8800/auth/getUserFromToken/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzUxLCJpYXQiOjE2OTk1NDAzNTJ9.46sGrJrPGDdSo1iXibrxHWl_C5sscsLmbQRfW135ofVtYaoa2f4v5goYkYX0jm4rRvKpa45RQBIVepTWr8VVjw",
+									"raw": "http://localhost:8800/userProfile/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8800",
 									"path": [
-										"auth",
-										"getUserFromToken",
-										"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzUxLCJpYXQiOjE2OTk1NDAzNTJ9.46sGrJrPGDdSo1iXibrxHWl_C5sscsLmbQRfW135ofVtYaoa2f4v5goYkYX0jm4rRvKpa45RQBIVepTWr8VVjw"
+										"userProfile",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ChangeUserPwd",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzU2LCJpYXQiOjE2OTk1NDAzNTZ9.4dE-hxCgF1bofABAkRc-PTRpiz_P4wrKV-0fiLrCDQC3XAMERFMUxRDHDg5TltSNnRu6X4HWETHIVA6R-dxtNQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8800/userProfile/changePassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8800",
+									"path": [
+										"userProfile",
+										"changePassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ForgotUserPwd",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzU2LCJpYXQiOjE2OTk1NDAzNTZ9.4dE-hxCgF1bofABAkRc-PTRpiz_P4wrKV-0fiLrCDQC3XAMERFMUxRDHDg5TltSNnRu6X4HWETHIVA6R-dxtNQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8800/userProfile/forgetPassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8800",
+									"path": [
+										"userProfile",
+										"forgetPassword"
 									]
 								}
 							},
@@ -250,7 +397,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5MjgwMzAxLCJpYXQiOjE2OTkyNzczMDF9.lqTIdJnGj88LU0r6-N79wKGWWUUtGqAF0x2-MEa4DsSLhwKujTqqXrj98sRsud_T6Nhgy9KkZ3CHFAXccVnG0g",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
 											"type": "string"
 										}
 									]
@@ -280,7 +427,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5MzU4MjM0LCJpYXQiOjE2OTkzNTUyMzZ9.YvfVTTYhJWgXH5_O4cvsrdm40EzOf0Gtv_BoE_cPsb8BluSdID_PdqLksMbW9S_hkl19XNIEIo6WTyEVTeEN_A",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
 											"type": "string"
 										}
 									]
@@ -486,7 +633,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzU2LCJpYXQiOjE2OTk1NDAzNTZ9.4dE-hxCgF1bofABAkRc-PTRpiz_P4wrKV-0fiLrCDQC3XAMERFMUxRDHDg5TltSNnRu6X4HWETHIVA6R-dxtNQ",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
 											"type": "string"
 										}
 									]
@@ -494,7 +641,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8800/wishlist/getFavorites?userEmail=kuruva.siva8055@gmail.com",
+									"raw": "http://localhost:8800/wishlist/getFavorites",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -503,12 +650,6 @@
 									"path": [
 										"wishlist",
 										"getFavorites"
-									],
-									"query": [
-										{
-											"key": "userEmail",
-											"value": "kuruva.siva8055@gmail.com"
-										}
 									]
 								}
 							},

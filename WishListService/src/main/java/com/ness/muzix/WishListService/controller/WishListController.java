@@ -7,13 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ness.muzix.WishListService.entities.WhislistDTO;
 import com.ness.muzix.WishListService.exception.WishListException;
@@ -33,8 +27,8 @@ public class WishListController {
 	ModelMapper modelMapper;
 
 	@GetMapping("/getFavorites")
-	public ResponseEntity<?> getFavorites(@RequestParam String userEmail){
-		return new ResponseEntity<>(wishlistService.getFavourites(userEmail),HttpStatus.OK);
+	public ResponseEntity<?> getFavorites(@RequestHeader("email") String email){
+		return new ResponseEntity<>(wishlistService.getFavourites(email),HttpStatus.OK);
 	}
 	
 	@PostMapping("/updateFavorites")
