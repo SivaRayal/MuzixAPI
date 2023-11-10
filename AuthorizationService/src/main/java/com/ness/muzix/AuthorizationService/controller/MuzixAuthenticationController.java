@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 @Slf4j
 public class MuzixAuthenticationController {
-	private static final Logger log = LoggerFactory.getLogger(MuzixAuthenticationController.class);
 	
     @Autowired
     PasswordEncoder encoder;
@@ -47,10 +46,10 @@ public class MuzixAuthenticationController {
         return new ResponseEntity<>(token,HttpStatus.OK);
     }
 
-    @GetMapping("/getUserFromToken/{token}")
-    public ResponseEntity<?> getUserFromToken(@PathVariable String token){
-        String userEmail = Jwts.parser().setSigningKey("team05").parseClaimsJws(token).getBody().getSubject();
-        return new ResponseEntity<>(userEmail,HttpStatus.OK);
-    }
+//    @GetMapping("/getUserFromToken/{token}")
+//    public ResponseEntity<?> getUserFromToken(@PathVariable String token){
+//        String userEmail = Jwts.parser().setSigningKey("team05").parseClaimsJws(token).getBody().getSubject();
+//        return new ResponseEntity<>(userEmail,HttpStatus.OK);
+//    }
     
 }

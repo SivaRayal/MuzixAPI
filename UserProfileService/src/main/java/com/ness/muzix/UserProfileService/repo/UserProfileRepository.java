@@ -5,14 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ness.muzix.UserProfileService.model.UserProfile;
+import com.ness.muzix.UserProfileService.entity.UserProfile;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface UserProfileRepository extends CrudRepository<UserProfile, Long> {
-
-	UserProfile findByUserEmail(String userEmail);
+public interface UserProfileRepository extends CrudRepository<UserProfile, String> {
 
 	UserProfile findByUserEmailAndPassword(String userEmail, String password);
 

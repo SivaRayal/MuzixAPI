@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ness.muzix.UserProfileService.dto.ResponseDto;
+import com.ness.muzix.UserProfileService.model.ResponseDto;
 
 import jakarta.servlet.http.HttpServletResponse;
 

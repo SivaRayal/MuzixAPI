@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ness.muzix</groupId>
 	<artifactId>Gateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Gateway</name>
 	<description>Gateway API </description>
 	<properties>
@@ -65,7 +65,11 @@
 			<version>0.9.1</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
