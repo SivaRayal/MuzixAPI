@@ -19,7 +19,7 @@ public class UserProfileConfigs {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http.cors().and().csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests()
-				.requestMatchers("/auth/**")
+				.requestMatchers("/userProfile/**")
 				.access((authentication, context) ->
 						new AuthorizationDecision(new IpAddressMatcher("127.0.0.1").matches(context.getRequest())));
 		return http.build();
