@@ -1,14 +1,14 @@
 package com.ness.muzix.AuthorizationService.controller;
 
-import io.jsonwebtoken.Jwts;
-import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import io.swagger.v3.oas.annotations.Operation;
+//import io.swagger.v3.oas.annotations.media.Content;
+//import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.ness.muzix.AuthorizationService.exception.AuthorizationException;
@@ -18,7 +18,7 @@ import com.ness.muzix.AuthorizationService.service.MuzixAuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(value="/auth")
 @Slf4j
 public class MuzixAuthenticationController {
 	
@@ -27,10 +27,11 @@ public class MuzixAuthenticationController {
 
     @Autowired
     MuzixAuthenticationService authService;
-    
-    
-    @GetMapping("/validate")
-    public ResponseEntity<?> authenticate(@Validated @RequestBody UserProfileDto userCredits){
+
+    @Operation(summary = "Muzix Authorization Service", description = "Validates user email and password and return JWT token for sucessfull validations")
+    @PostMapping(path="/validate", consumes= {MediaType.APPLICATION_JSON_VALUE})
+//    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema=@Schema(implementation = UserProfileDto.class)))
+    public ResponseEntity<String> authenticate(@RequestBody UserProfileDto userCredits){
         UserProfileDto existingUser = authService.getUserByEmail(userCredits.getUserEmail());
         String token="";
         if(existingUser!=null){
@@ -43,13 +44,7 @@ public class MuzixAuthenticationController {
         }else{
             throw new AuthorizationException("User not found. Kindly register for new user login");
         }
-        return new ResponseEntity<>(token,HttpStatus.OK);
+        return new ResponseEntity<String>(token,HttpStatus.OK);
     }
-
-//    @GetMapping("/getUserFromToken/{token}")
-//    public ResponseEntity<?> getUserFromToken(@PathVariable String token){
-//        String userEmail = Jwts.parser().setSigningKey("team05").parseClaimsJws(token).getBody().getSubject();
-//        return new ResponseEntity<>(userEmail,HttpStatus.OK);
-//    }
     
 }
