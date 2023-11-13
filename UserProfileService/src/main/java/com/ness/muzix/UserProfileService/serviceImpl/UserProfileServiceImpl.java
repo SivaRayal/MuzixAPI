@@ -45,7 +45,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		}
 		try {
 			UserProfile newUser=modelMapper.map(userProfile,UserProfile.class);
-			newUser.setPassword(encoder.encode(newUser.getPassword()));
+//			newUser.setPassword(encoder.encode(newUser.getPassword()));
 			UserProfile response = userProfileRepository.save(newUser);
 			LOG.info("UserProfileServiceImpl.register API Resposne -> "+ response.toString());
 		}catch (Exception e) {
