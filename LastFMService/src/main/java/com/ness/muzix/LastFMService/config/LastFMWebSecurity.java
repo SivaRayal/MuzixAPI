@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.IpAddressMatcher;
 public class LastFMWebSecurity{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-         http.csrf(csrf -> csrf.disable())
+        http.cors().and().csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests()
                 .requestMatchers("/lastfm/**")
                 .access((authentication, context) ->

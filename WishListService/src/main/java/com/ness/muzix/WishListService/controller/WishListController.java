@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/wishlist")
+@CrossOrigin(origins = "*")
 public class WishListController {
 	@Autowired
 	WishListService wishlistService;

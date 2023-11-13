@@ -17,7 +17,7 @@ public class MuzixSecurityConfig {
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf(csrf -> csrf.disable())
+        http.cors().and().csrf(csrf -> csrf.disable())
         .authorizeHttpRequests()
         .requestMatchers("/auth/**")
         .access((authentication, context) ->
