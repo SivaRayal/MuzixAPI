@@ -29,6 +29,8 @@ public class GatewayApplication {
 		return builder.routes()
 				.route("auth_route",route->route.path("/auth/**").uri("lb://auth-service"))
 				.route("userprofile_route", route->route.path("/userProfile/register").uri("lb://userprofile-service"))
+				.route("userprofile_route", route->route.path("/userProfile/changePassword").uri("lb://userprofile-service"))
+				.route("userprofile_route", route->route.path("/userProfile/forgetPassword").uri("lb://userprofile-service"))
 				.route("userprofile_route", route->route.path("/userProfile/api-docs").uri("lb://userprofile-service"))
 				.route("lastFMService_route",route->route.path("/lastfm/api-docs").uri("lb://lastfm-service"))
 				.route("whishlist_route",route->route.path("/wishlist/api-docs").uri("lb://whishlist-service"))
