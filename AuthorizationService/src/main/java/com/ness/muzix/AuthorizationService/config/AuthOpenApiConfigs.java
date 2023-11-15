@@ -12,7 +12,7 @@ import java.util.List;
 
 @OpenAPIDefinition
 @Configuration
-public class OpenApiConfigs {
+public class AuthOpenApiConfigs {
     @Bean
     public OpenAPI customOpenAPI(
             @Value("${openapi.service.title}") String serviceTitle,

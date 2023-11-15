@@ -27,12 +27,14 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator apiRoutes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route(r -> r.path("/auth/api-docs").and().method(HttpMethod.GET).uri("lb://auth-service"))
-				.route("whishlist_route",route->route.path("/wishlist/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://whishlist-service"))
-				.route("lastFMService_route",route->route.path("/lastfm/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://lastfm-service"))
-				.route("userprofile_route", route->route.path("/userProfile/register").uri("lb://userprofile-service"))
-				.route("userprofile_route", route->route.path("/userProfile/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://userprofile-service"))
 				.route("auth_route",route->route.path("/auth/**").uri("lb://auth-service"))
+				.route("userprofile_route", route->route.path("/userProfile/register").uri("lb://userprofile-service"))
+				.route("userprofile_route", route->route.path("/userProfile/api-docs").uri("lb://userprofile-service"))
+				.route("lastFMService_route",route->route.path("/lastfm/api-docs").uri("lb://lastfm-service"))
+				.route("whishlist_route",route->route.path("/wishlist/api-docs").uri("lb://whishlist-service"))
+				.route("userprofile_route", route->route.path("/userProfile/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://userprofile-service"))
+				.route("lastFMService_route",route->route.path("/lastfm/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://lastfm-service"))
+				.route("whishlist_route",route->route.path("/wishlist/**").filters(f->f.filter(muzixAuthFilter)).uri("lb://whishlist-service"))
 				.build();
 	}
 

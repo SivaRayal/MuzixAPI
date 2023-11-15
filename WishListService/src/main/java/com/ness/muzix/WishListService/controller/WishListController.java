@@ -1,5 +1,6 @@
 package com.ness.muzix.WishListService.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,11 +28,13 @@ public class WishListController {
 	ModelMapper modelMapper;
 
 	@GetMapping("/getFavorites")
+	@Operation(summary = "Muzix Wishlist Service", description = "Retrieves users favourites tracks/songs list based on login authorization token.")
 	public ResponseEntity<?> getFavorites(@RequestHeader("email") String email){
 		return new ResponseEntity<>(wishlistService.getFavourites(email),HttpStatus.OK);
 	}
 	
 	@PostMapping("/updateFavorites")
+	@Operation(summary = "Muzix Wishlist Service", description = "Updates users favourites tracks/songs to Muzix app DB.")
 	public ResponseEntity<WhislistRequest> updateFavorites(@Validated @RequestBody WhislistRequest requestWishlist, BindingResult result){
 		//Bindning Error handle
          if (result.hasErrors()) {
@@ -47,6 +50,7 @@ public class WishListController {
 	}
 
 	@DeleteMapping("/removeFavorites")
+	@Operation(summary = "Muzix Wishlist Service", description = "Removes users favourites tracks/songs from the list.")
 	public ResponseEntity<?> removeFavorites(@Validated @RequestBody WhislistRequest requestWishlist, BindingResult result){
 		//Bindning Error handle
          if (result.hasErrors()) {
