@@ -14,15 +14,12 @@
 					"item": [
 						{
 							"name": "validateUser",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"UserEmail\":\"kuruva.siva8055@gmail.com\",\r\n    \"Password\":\"siva142\"\r\n}",
+									"raw": "{\r\n    \"UserEmail\":\"kuruva.siva8055@gmail.com\",\r\n    \"Password\":\"siva141\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -54,15 +51,41 @@
 					"item": [
 						{
 							"name": "validateUser",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"UserEmail\":\"kuruva.siva8055@gmail.com\",\r\n    \"Password\":\"siva141\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8800/auth/validate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8800",
+									"path": [
+										"auth",
+										"validate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validateUser2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\r\n    \"Password\": \"vish123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -93,7 +116,194 @@
 			"item": [
 				{
 					"name": "Direct",
-					"item": []
+					"item": [
+						{
+							"name": "GetUserProfile",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "email",
+										"value": "kuruva.siva8055@gmail.com",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5005/userProfile/getUserProfile",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"userProfile",
+										"getUserProfile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNzAwMTAxOTg5LCJpYXQiOjE3MDAwOTg5ODl9.kE0xEUSrMG3Smyjtl6fQ12V2Qg2RMDZG3MQHoTK-2F8LyZntwQtRzjNVQicQvwqpQIyrNQuF-cldqVV67Wgehg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"FirstName\": \"Siva Sai\",\r\n    \"LastName\": \"Kuruva\",\r\n    \"UserEmail\": \"kuruva.siva8055@gmail.com\",\r\n    \"ContactNumber\": \"8899223344\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5005/userProfile/updateUserProfile",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"userProfile",
+										"updateUserProfile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RegisterUser",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\n    \"Password\": \"vishwa123\",\n    \"FirstName\": \"Gobinathan\",\n    \"LastName\": \"Vishwanathan\",\n    \"ContactNumber\": \"8899223344\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5005/userProfile/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"userProfile",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ChangeUserPwd",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\r\n    \"OldPassword\": \"vishwa123\",\r\n    \"NewPassword\": \"vish123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5005/userProfile/changePassword",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"userProfile",
+										"changePassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ForgotUserPwd",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\r\n    \"NewPassword\": \"vish123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5005/userProfile/forgetPassword",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5005",
+									"path": [
+										"userProfile",
+										"forgetPassword"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Gateway",
@@ -106,7 +316,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE4MTg0LCJpYXQiOjE2OTk2MTUxODR9.8GHve4JrIzhFLPXt1DM8XH45eDTWr0jZAA1xnDYv0JiY5yWwshTIRxb9bWU4FRkkU2Q8Drvq7y9dn3c8DAZW_w",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNzAwMTAxOTg5LCJpYXQiOjE3MDAwOTg5ODl9.kE0xEUSrMG3Smyjtl6fQ12V2Qg2RMDZG3MQHoTK-2F8LyZntwQtRzjNVQicQvwqpQIyrNQuF-cldqVV67Wgehg",
 											"type": "string"
 										}
 									]
@@ -143,7 +353,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNzAwMTAxOTg5LCJpYXQiOjE3MDAwOTg5ODl9.kE0xEUSrMG3Smyjtl6fQ12V2Qg2RMDZG3MQHoTK-2F8LyZntwQtRzjNVQicQvwqpQIyrNQuF-cldqVV67Wgehg",
 											"type": "string"
 										}
 									]
@@ -157,6 +367,15 @@
 										"disabled": true
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"FirstName\": \"Siva Sai\",\r\n    \"LastName\": \"Kuruva\",\r\n    \"UserEmail\": \"kuruva.siva8055@gmail.com\",\r\n    \"ContactNumber\": \"8899223344\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8800/userProfile/updateUserProfile",
 									"protocol": "http",
@@ -182,7 +401,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"Password\": \"vishwa123\",\n    \"FirstName\": \"Gobinathan\",\n    \"LastName\": \"Vishwanathan\",\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\n    \"ContactNumber\": \"8899223344\"\n}",
+									"raw": "{\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\n    \"Password\": \"vishwa123\",\n    \"FirstName\": \"Gobinathan\",\n    \"LastName\": \"Vishwanathan\",\n    \"ContactNumber\": \"8899223344\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -208,17 +427,19 @@
 							"name": "ChangeUserPwd",
 							"request": {
 								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzU2LCJpYXQiOjE2OTk1NDAzNTZ9.4dE-hxCgF1bofABAkRc-PTRpiz_P4wrKV-0fiLrCDQC3XAMERFMUxRDHDg5TltSNnRu6X4HWETHIVA6R-dxtNQ",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\r\n    \"OldPassword\": \"vishwa123\",\r\n    \"NewPassword\": \"vish123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8800/userProfile/changePassword",
 									"protocol": "http",
@@ -238,17 +459,19 @@
 							"name": "ForgotUserPwd",
 							"request": {
 								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NTQzMzU2LCJpYXQiOjE2OTk1NDAzNTZ9.4dE-hxCgF1bofABAkRc-PTRpiz_P4wrKV-0fiLrCDQC3XAMERFMUxRDHDg5TltSNnRu6X4HWETHIVA6R-dxtNQ",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserEmail\": \"Gobinathan123@gmail.com\",\r\n    \"NewPassword\": \"vish123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8800/userProfile/forgetPassword",
 									"protocol": "http",
@@ -278,19 +501,12 @@
 							"name": "getTags",
 							"request": {
 								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5MjgwMzAxLCJpYXQiOjE2OTkyNzczMDF9.lqTIdJnGj88LU0r6-N79wKGWWUUtGqAF0x2-MEa4DsSLhwKujTqqXrj98sRsud_T6Nhgy9KkZ3CHFAXccVnG0g",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8083/lastfm/recommendedTags",
+									"raw": "http://127.0.0.1:5020/lastfm/recommendedTags",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -298,7 +514,7 @@
 										"0",
 										"1"
 									],
-									"port": "8083",
+									"port": "5020",
 									"path": [
 										"lastfm",
 										"recommendedTags"
@@ -313,7 +529,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8083/lastfm/recommendedTracks?tag=rock",
+									"raw": "http://127.0.0.1:5020/lastfm/recommendedTracks?tag=rock",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -321,7 +537,7 @@
 										"0",
 										"1"
 									],
-									"port": "8083",
+									"port": "5020",
 									"path": [
 										"lastfm",
 										"recommendedTracks"
@@ -342,7 +558,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8083/lastfm/searchByTitle/Thunder",
+									"raw": "http://127.0.0.1:5020/lastfm/searchByTitle/Thunder",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -350,7 +566,7 @@
 										"0",
 										"1"
 									],
-									"port": "8083",
+									"port": "5020",
 									"path": [
 										"lastfm",
 										"searchByTitle",
@@ -366,7 +582,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8083/lastfm/searchByArtist/Ed Sheeran",
+									"raw": "http://127.0.0.1:5020/lastfm/searchByArtist/Ed Sheeran",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -374,7 +590,7 @@
 										"0",
 										"1"
 									],
-									"port": "8083",
+									"port": "5020",
 									"path": [
 										"lastfm",
 										"searchByArtist",
@@ -397,7 +613,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHb2JpbmF0aGFuMTIzQGdtYWlsLmNvbSIsImV4cCI6MTcwMDEwMzM2MCwiaWF0IjoxNzAwMTAwMzYwfQ.76XDLMdWe2RzAGmGvLw3gUlw4UDPWih1-MJZPYTak_ktcYBbXJzYRRu5hysu29j9LC2J6n_crzXSz57amsOXzQ",
 											"type": "string"
 										}
 									]
@@ -427,7 +643,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5NjE2NjM1LCJpYXQiOjE2OTk2MTM2MzZ9.QKOuUHUJefiACZ5mlld4ppniWNqxVMXmzqzicV17zgiRJQhGHHkjZGL2BE0gPnp2buSxwqUcx4cbSHOVn1L4Fw",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHb2JpbmF0aGFuMTIzQGdtYWlsLmNvbSIsImV4cCI6MTcwMDEwMzM2MCwiaWF0IjoxNzAwMTAwMzYwfQ.76XDLMdWe2RzAGmGvLw3gUlw4UDPWih1-MJZPYTak_ktcYBbXJzYRRu5hysu29j9LC2J6n_crzXSz57amsOXzQ",
 											"type": "string"
 										}
 									]
@@ -463,7 +679,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5MjgwMzAxLCJpYXQiOjE2OTkyNzczMDF9.lqTIdJnGj88LU0r6-N79wKGWWUUtGqAF0x2-MEa4DsSLhwKujTqqXrj98sRsud_T6Nhgy9KkZ3CHFAXccVnG0g",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHb2JpbmF0aGFuMTIzQGdtYWlsLmNvbSIsImV4cCI6MTcwMDEwMzM2MCwiaWF0IjoxNzAwMTAwMzYwfQ.76XDLMdWe2RzAGmGvLw3gUlw4UDPWih1-MJZPYTak_ktcYBbXJzYRRu5hysu29j9LC2J6n_crzXSz57amsOXzQ",
 											"type": "string"
 										}
 									]
@@ -494,7 +710,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdXJ1dmEuc2l2YTgwNTVAZ21haWwuY29tIiwiZXhwIjoxNjk5MjgwMzAxLCJpYXQiOjE2OTkyNzczMDF9.lqTIdJnGj88LU0r6-N79wKGWWUUtGqAF0x2-MEa4DsSLhwKujTqqXrj98sRsud_T6Nhgy9KkZ3CHFAXccVnG0g",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHb2JpbmF0aGFuMTIzQGdtYWlsLmNvbSIsImV4cCI6MTcwMDEwMzM2MCwiaWF0IjoxNzAwMTAwMzYwfQ.76XDLMdWe2RzAGmGvLw3gUlw4UDPWih1-MJZPYTak_ktcYBbXJzYRRu5hysu29j9LC2J6n_crzXSz57amsOXzQ",
 											"type": "string"
 										}
 									]
@@ -533,7 +749,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8082/wishlist/getFavorites?userEmail=kuruva.siva8055@gmail.com",
+									"raw": "http://127.0.0.1:5010/wishlist/getFavorites?userEmail=kuruva.siva8055@gmail.com",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -541,7 +757,7 @@
 										"0",
 										"1"
 									],
-									"port": "8082",
+									"port": "5010",
 									"path": [
 										"wishlist",
 										"getFavorites"
@@ -571,7 +787,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8082/wishlist/updateFavorites",
+									"raw": "http://127.0.0.1:5010/wishlist/updateFavorites",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -579,7 +795,7 @@
 										"0",
 										"1"
 									],
-									"port": "8082",
+									"port": "5010",
 									"path": [
 										"wishlist",
 										"updateFavorites"
@@ -603,7 +819,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8082/wishlist/removeFavorites",
+									"raw": "http://127.0.0.1:5010/wishlist/removeFavorites",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -611,7 +827,7 @@
 										"0",
 										"1"
 									],
-									"port": "8082",
+									"port": "5010",
 									"path": [
 										"wishlist",
 										"removeFavorites"

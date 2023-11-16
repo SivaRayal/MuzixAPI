@@ -45,11 +45,10 @@ public class UserProfileController {
 	}
 	
 	@PutMapping("/changePassword")
-	@ResponseStatus(HttpStatus.RESET_CONTENT)
 	@Operation(summary = "Muzix Userprofile Service", description = "Service for changing user password if previous password is known to user.")
 	public ResponseEntity<String> changePassword(@RequestBody UserProfileDto user) throws UserProfileException {
 		return new ResponseEntity<String>(userProfileService.changePassword(user.getUserEmail(),user.getOldPassword(),user.getNewPassword()),
-				HttpStatus.RESET_CONTENT);
+				HttpStatus.OK);
 	}
 	
 	@PutMapping("/forgetPassword")

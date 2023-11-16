@@ -34,6 +34,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Autowired
 	UserProfileDTOMapper userProfileMapper;
 
+	@Override
 	public String addUserProfile(UserProfileResponse userProfile) throws UserProfileException {
 		
 		if(userProfile.getPassword()!=null && !(userProfile.getPassword().isEmpty())) {
@@ -54,6 +55,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		return "Profile saved successfully";
 	}
 
+	@Override
 	public UserProfileResponse getUserProfile(String email) throws UserProfileException {
 		UserProfileResponse resp = null;
 		try {
@@ -69,6 +71,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	}
 
+	@Override
 	public String updateProfile(UserProfileResponse newProfile) throws UserProfileException {
 		Optional<UserProfile> existingProfile = null;
 		try {
