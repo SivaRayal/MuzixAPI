@@ -20,5 +20,7 @@ public class MuzixAppConfig {
 	
 	@Value("${lastfm.recomendedTracks}")
 	private String recommendedTracksURL;
-	
+
+	@Value("${access.ip}")
+	private String accessIP;
 }

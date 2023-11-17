@@ -10,6 +10,7 @@ import lombok.Data;
 public class MuzixAppConfigs {
     @Value("${token.expiration.time}")
     private String tokenExpTime;
+
     @Value("${token.secret}")
     private String tokenSecret;
 }
