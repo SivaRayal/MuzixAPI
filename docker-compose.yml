@@ -1,0 +1,108 @@
+version: '3'
+
+services:
+  dockmysqldb:
+    image: mysql:8.0.32
+    container_name: dockmysqldb
+    deploy:
+      replicas: 1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fsd
+    restart: on-failure
+    volumes:
+      - muzix_db:/var/lib/usermysqldb/data
+    networks:
+      - muzix-backend
+
+  dockmongdb:
+    image: mongo:6.0.3
+    container_name: dockmongdb
+    deploy:
+      replicas: 1
+    restart: on-failure
+    volumes:
+      - muzix_db:/var/lib/favouritesmongodb/data
+    networks:
+      - muzix-backend
+
+  muzix-eureka-v1:
+    build:
+      context: ServiceRegistry
+      dockerfile: Dockerfile
+    container_name: muzix-eureka-c1
+    ports:
+      - 8010:8010
+    networks:
+      - muzix-backend
+
+  muzix-gateway-v1:
+    depends_on:
+      - muzix-eureka-v1
+    build:
+      context: Gateway
+      dockerfile: Dockerfile
+    container_name: muzix-gateway-c1
+    ports:
+      - 8800:8800
+    networks:
+      - muzix-backend
+
+  muzix-userprofile-v1:
+    depends_on:
+      - dockmysqldb
+      - muzix-gateway-v1
+    build:
+      context: UserProfileService
+      dockerfile: Dockerfile
+    container_name: muzix-userprofile-c1
+    ports:
+      - 5005:5005
+    networks:
+      - muzix-backend
+
+  muzix-auth-service-v1:
+    depends_on:
+      - dockmysqldb
+      - muzix-gateway-v1
+    build:
+      context: AuthorizationService
+      dockerfile: Dockerfile
+    container_name: muzix-auth-service-c1
+    ports:
+      - 5000:5000
+    networks:
+      - muzix-backend
+
+  muzix-wishlist-v1:
+    depends_on:
+      - muzix-gateway-v1
+      - dockmongdb
+    build:
+      context: WishListService
+      dockerfile: Dockerfile
+    container_name: muzix-wishlist-c1
+    ports:
+      - 5010:5010
+    networks:
+      - muzix-backend
+
+  muzix-lasfm-service-v1:
+    depends_on:
+      - muzix-gateway-v1
+    build:
+      context: LastFMService
+      dockerfile: Dockerfile
+    container_name: muzix-lasfm-service-c1
+    ports:
+      - 5020:5020
+    networks:
+      - muzix-backend
+
+networks:
+  muzix-backend:
+    external: true
+
+volumes:
+  muzix_db:
+    driver: local
