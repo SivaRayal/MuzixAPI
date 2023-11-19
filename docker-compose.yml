@@ -30,6 +30,7 @@ services:
     build:
       context: ServiceRegistry
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-eureka-v1
     container_name: muzix-eureka-c1
     ports:
       - 8010:8010
@@ -42,6 +43,7 @@ services:
     build:
       context: Gateway
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-gateway-v1
     container_name: muzix-gateway-c1
     ports:
       - 8800:8800
@@ -55,6 +57,7 @@ services:
     build:
       context: UserProfileService
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-userprofile-v1
     container_name: muzix-userprofile-c1
     ports:
       - 5005:5005
@@ -70,6 +73,7 @@ services:
     build:
       context: AuthorizationService
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-auth-service-v1
     container_name: muzix-auth-service-c1
     ports:
       - 5000:5000
@@ -84,6 +88,7 @@ services:
     build:
       context: WishListService
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-wishlist-v1
     container_name: muzix-wishlist-c1
     ports:
       - 5010:5010
@@ -96,6 +101,7 @@ services:
     build:
       context: LastFMService
       dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-lasfm-service-v1
     container_name: muzix-lasfm-service-c1
     ports:
       - 5020:5020
