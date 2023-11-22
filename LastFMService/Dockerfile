@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64/v8 openjdk:17.0.2-oracle
+FROM openjdk:17.0.2-oracle
 MAINTAINER Siva
 WORKDIR /opt/app/home
 COPY ./target/LastFMService-1.0.jar LastFMService.jar
