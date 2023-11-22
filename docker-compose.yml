@@ -16,7 +16,8 @@ services:
       - muzix-backend
 
   dockmongdb:
-    image: mongo:6.0.3
+#    image: mongo:6.0.3
+    image: mongo:bionic
     container_name: dockmongdb
     deploy:
       replicas: 1
