@@ -1,4 +1,4 @@
-FROM openjdk:17.0.2-oracle
+FROM --platform=linux/amd64 openjdk:17.0.2-oracle
 WORKDIR /opt/app
 COPY ./target/ServiceRegistry-1.0.jar ServiceRegistry.jar
 EXPOSE 8010
