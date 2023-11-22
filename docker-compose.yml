@@ -26,7 +26,7 @@ services:
     networks:
       - muzix-backend
 
-  muzix-eureka-v1:
+  muzix-eureka:
     build:
       context: ServiceRegistry
       dockerfile: Dockerfile
@@ -37,9 +37,9 @@ services:
     networks:
       - muzix-backend
 
-  muzix-gateway-v1:
+  muzix-gateway:
     depends_on:
-      - muzix-eureka-v1
+      - muzix-eureka
     build:
       context: Gateway
       dockerfile: Dockerfile
@@ -50,10 +50,10 @@ services:
     networks:
       - muzix-backend
 
-  muzix-userprofile-v1:
+  muzix-userprofile-service:
     depends_on:
       - dockmysqldb
-      - muzix-gateway-v1
+      - muzix-gateway
     build:
       context: UserProfileService
       dockerfile: Dockerfile
@@ -65,15 +65,15 @@ services:
       - muzix-backend
     restart: on-failure
 
-  muzix-auth-service-v1:
+  muzix-auth-service:
     depends_on:
       - dockmysqldb
-      - muzix-gateway-v1
-      - muzix-userprofile-v1
+      - muzix-gateway
+      - muzix-userprofile-service
     build:
       context: AuthorizationService
       dockerfile: Dockerfile
-    image: sivarayal/muzix:muzix-auth-service-v1
+    image: sivarayal/muzix:muzix-authservice-v1
     container_name: muzix-auth-service-c1
     ports:
       - 5000:5000
@@ -81,9 +81,9 @@ services:
       - muzix-backend
     restart: on-failure
 
-  muzix-wishlist-v1:
+  muzix-wishlist-service:
     depends_on:
-      - muzix-gateway-v1
+      - muzix-gateway
       - dockmongdb
     build:
       context: WishListService
@@ -95,13 +95,13 @@ services:
     networks:
       - muzix-backend
 
-  muzix-lasfm-service-v1:
+  muzix-lastfm-service:
     depends_on:
-      - muzix-gateway-v1
+      - muzix-gateway
     build:
       context: LastFMService
       dockerfile: Dockerfile
-    image: sivarayal/muzix:muzix-lasfm-service-v1
+    image: sivarayal/muzix:muzix-lastfm-v1
     container_name: muzix-lasfm-service-c1
     ports:
       - 5020:5020

@@ -1,4 +1,4 @@
-FROM openjdk:17.0.2-oracle
+FROM --platform=linux/amd64/v8 openjdk:17.0.2-oracle
 MAINTAINER Siva
 WORKDIR /opt/app/home
 COPY ./target/AuthorizationService-1.0.jar AuthorizationService.jar
