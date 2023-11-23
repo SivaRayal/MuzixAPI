@@ -41,7 +41,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 			userProfile.setPassword(encoder.encode(userProfile.getPassword()));
 		}
 		Optional<UserProfile> exists =  userProfileRepository.findById(userProfile.getUserEmail());
-		if(!exists.isEmpty()) {
+		if(exists!=null) {
 			throw new UserProfileException(HttpStatus.NOT_ACCEPTABLE.value(), "User already registered");
 		}
 		try {
@@ -80,7 +80,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 			throw new UserProfileException(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
 		}
 
-		if (existingProfile.isEmpty()) {
+		if (existingProfile==null) {
 			throw new UserProfileException(HttpStatus.NOT_FOUND.value(), "User Not found. Kindly Register as new user");
 		}else{
 			UserProfile updatedProfile=userProfileMapper.getUpdatedEntityFromDTO(existingProfile.get(),newProfile);
@@ -93,7 +93,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 	public String changePassword(String userEmail, String oldPassword, String newPassword) throws UserProfileException {
 		// TODO Auto-generated method stub
 		Optional<UserProfile> userProfile = userProfileRepository.findById(userEmail);
-		if (userProfile.isEmpty()) {
+		if (userProfile==null) {
 			throw new UserProfileException(HttpStatus.NOT_FOUND.value(), "User Not found");
 		}
 		else{
