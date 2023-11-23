@@ -91,6 +91,7 @@ services:
       dockerfile: Dockerfile
     image: sivarayal/muzix:muzix-wishlist-v1
     container_name: muzix-wishlist-c1
+    restart: on-failure
     ports:
       - 5010:5010
     networks:
