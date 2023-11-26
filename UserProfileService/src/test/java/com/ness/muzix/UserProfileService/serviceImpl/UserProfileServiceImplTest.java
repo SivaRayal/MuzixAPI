@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,11 +44,12 @@ class UserProfileServiceImplTest {
 
 	
 	Optional<UserProfile> exist = null;
+	Optional<UserProfile> empty = Optional.empty();
+	Optional<UserProfile> userExist = Optional.of(new UserProfile());
 	Optional<UserProfile> exists = Optional.of(new UserProfile());
 	UserProfileResponse userProfileResponse = new UserProfileResponse();
 	UserProfileResponse newProfile = new UserProfileResponse();
 	UserProfile userProfile = new UserProfile();
-	
 	String string1 = "Profile saved successfully";
 
 	@BeforeEach
@@ -76,13 +78,15 @@ class UserProfileServiceImplTest {
 		exists.get().setLastName("stokes1");
 		exists.get().setUserEmail("qw@gmail.com");
 		exists.get().setPassword("qw@123");
+	
 
 	}
 
 	@Test
 	public void testAddUserProfile() {
+		
 		//mock the behaviour
-		when(repository.findById(userProfile.getUserEmail())).thenReturn(exist);
+		when(repository.findById(userProfile.getUserEmail())).thenReturn(empty);
 		assertThrows(UserProfileException.class,()->service.getUserProfile(userProfile.getUserEmail()));
 		when(modelMapper.map(userProfileResponse, UserProfile.class)).thenReturn(userProfile);
 		when(repository.save(userProfile)).thenReturn(userProfile);
@@ -98,6 +102,23 @@ class UserProfileServiceImplTest {
 		}, () -> {
 			assertEquals(string1, "Profile saved successfully");
 		});
+	}
+	
+	@Test
+	public void testAddUserProfileWhenUserExists() {
+		//mock the behaviour
+		when(repository.findById(userProfile.getUserEmail())).thenReturn(userExist);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.addUserProfile(userProfileResponse));
+	}
+	
+	@Test
+	public void testAddUserProfileWhenAddProfile() {
+		//mock the behaviour
+		when(repository.findById(userProfile.getUserEmail())).thenReturn(empty);
+		when(modelMapper.map(userProfileResponse, UserProfile.class)).thenReturn(userProfile);
+		when(repository.save(userProfile)).thenReturn(null);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.addUserProfile(userProfileResponse));
+		
 	}
 	
 	@Test
@@ -128,27 +149,66 @@ class UserProfileServiceImplTest {
 	}
 	
 	@Test
+	public void testUpdateProfileWhenUserExists() {
+		//mock the behaviour
+		when(repository.findById(null)).thenReturn(empty);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.updateProfile(userProfileResponse));
+	}
+	
+	@Test
+	public void testUpdateProfileWhenUpdateProfile() {
+		//mock the behaviour
+		when(repository.findById(userProfile.getUserEmail())).thenReturn(empty);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.updateProfile(userProfileResponse));
+		
+	}
+	
+	@Test
 	void testChangePassword() {
-		repository.updateUserProfile(exists.get().getUserEmail(),encoder.encode(newProfile.getPassword()));
+		//Mock calls
+		when(repository.findById("test@gmail.com")).thenReturn(exists);
+		when(encoder.matches("qw@123",exists.get().getPassword())).thenReturn(true);
+		
+		service.changePassword("test@gmail.com", "qw@123", "test@1234");
 		
 		assertAll(() -> {
 			assertNotNull(newProfile);
 		}, () -> {
 			assertNotNull(exists);
-		}, () -> {
-			assertEquals(exists.get().getUserEmail(), newProfile.getUserEmail());
 		});
 	}
-
+	
+	@Test
+	void testChangePasswordwithUserNotFoundException() {
+		//Mock calls
+		when(repository.findById("test@gmail.com")).thenReturn(empty);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.changePassword("test@gmail.com", "test@123", "test@1234"));
+		
+	}
+	
+	@Test
+	void testChangePasswordwithWrongOldPasswordException() {
+		//Mock calls
+		when(repository.findById("qw@gmail.com")).thenReturn(exists);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.changePassword("qw@gmail.com", "qw@123", "test@1234"));
+		
+	}
+	
 	@Test
 	void testForgetPassword() {
-		//when(repository.findById("test@gmail.com")).thenReturn(exists);
-		//when(encoder.matches(userProfile.getPassword(),exists.get().getPassword())).thenReturn(true);
-		//when(encoder.encode(newProfile.getPassword())).thenReturn("encoded password");
-		repository.updateUserProfile(exists.get().getUserEmail(),encoder.encode(newProfile.getPassword()));
+		when(repository.findById("test@gmail.com")).thenReturn(exists);
+		service.forgetPassword("test@gmail.com", "test@123");
 		
 		assertNotNull(newProfile);
 		assertEquals(exists.get().getUserEmail(), newProfile.getUserEmail());
+	}
+	
+	@Test
+	void testForgetPasswordwithException() {
+		//Mock calls
+		when(repository.findById("test@gmail.com")).thenReturn(empty);
+		UserProfileException exc = Assertions.assertThrows(UserProfileException.class, ()->service.forgetPassword("test@gmail.com", "test@123"));
+		
 	}
 	
 }
