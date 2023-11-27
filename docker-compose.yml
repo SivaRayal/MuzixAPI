@@ -1,0 +1,119 @@
+version: '3'
+
+services:
+  dockmysqldb:
+    image: mysql:8.0.32
+    container_name: dockmysqldb
+    deploy:
+      replicas: 1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fsd
+    restart: on-failure
+    volumes:
+      - muzix_db:/var/lib/usermysqldb/data
+    networks:
+      - muzix-backend
+
+  dockmongdb:
+#    image: mongo:6.0.3
+    image: mongo:bionic
+    container_name: dockmongdb
+    deploy:
+      replicas: 1
+    restart: on-failure
+    volumes:
+      - muzix_db:/var/lib/favouritesmongodb/data
+    networks:
+      - muzix-backend
+
+  muzix-eureka:
+    build:
+      context: ServiceRegistry
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-eureka-v1
+    container_name: muzix-eureka-c1
+    ports:
+      - 8010:8010
+    networks:
+      - muzix-backend
+
+  muzix-gateway:
+    depends_on:
+      - muzix-eureka
+    build:
+      context: Gateway
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-gateway-v1
+    container_name: muzix-gateway-c1
+    ports:
+      - 8800:8800
+    networks:
+      - muzix-backend
+
+  muzix-userprofile-service:
+    depends_on:
+      - dockmysqldb
+      - muzix-gateway
+    build:
+      context: UserProfileService
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-userprofile-v1
+    container_name: muzix-userprofile-c1
+    ports:
+      - 5005:5005
+    networks:
+      - muzix-backend
+    restart: on-failure
+
+  muzix-auth-service:
+    depends_on:
+      - dockmysqldb
+      - muzix-gateway
+      - muzix-userprofile-service
+    build:
+      context: AuthorizationService
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-authservice-v1
+    container_name: muzix-auth-service-c1
+    ports:
+      - 5000:5000
+    networks:
+      - muzix-backend
+    restart: on-failure
+
+  muzix-wishlist-service:
+    depends_on:
+      - muzix-gateway
+      - dockmongdb
+    build:
+      context: WishListService
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-wishlist-v1
+    container_name: muzix-wishlist-c1
+    restart: on-failure
+    ports:
+      - 5010:5010
+    networks:
+      - muzix-backend
+
+  muzix-lastfm-service:
+    depends_on:
+      - muzix-gateway
+    build:
+      context: LastFMService
+      dockerfile: Dockerfile
+    image: sivarayal/muzix:muzix-lastfm-v1
+    container_name: muzix-lasfm-service-c1
+    ports:
+      - 5020:5020
+    networks:
+      - muzix-backend
+
+networks:
+  muzix-backend:
+    external: true
+
+volumes:
+  muzix_db:
+    driver: local
