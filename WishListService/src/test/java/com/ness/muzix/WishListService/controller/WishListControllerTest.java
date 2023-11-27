@@ -1,5 +1,6 @@
 package com.ness.muzix.WishListService.controller;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ class WishListControllerTest {
 	Optional<WhislistDTO> wiOptional = Optional.of(new WhislistDTO());
 	Optional<WhislistDTO> emOptional = Optional.empty();
 	WhislistRequest requestWishlist = new WhislistRequest(); 
-	BindingResult bindingResult = null; 
+	BindingResult bindingResult =  mock(BindingResult.class);
 
 	@BeforeEach
 	public void setup() {
@@ -86,19 +87,30 @@ class WishListControllerTest {
 
 	@Test
 	void testUpdateFavorites() {
-		//when(bindingResult.hasErrors()).thenReturn(false);
-		//when(modelMapper.map(requestWishlist, WhislistDTO.class)).thenReturn(whislistDTO);
-		//when(bindingResult.hasErrors()).thenReturn(true);
-		//when(service.addToFavorites(whislistDTO)).thenReturn(wiOptional);
-		//WishListException exc = Assertions.assertThrows(WishListException.class, ()->service.addToFavorites(whislistDTO));
-		
-		//controller.updateFavorites(requestWishlist,bindingResult);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(modelMapper.map(requestWishlist, WhislistDTO.class)).thenReturn(whislistDTO);
+		when(service.addToFavorites(whislistDTO)).thenReturn(wiOptional);
+
+		controller.updateFavorites(requestWishlist,bindingResult);
 		
 	}
 
 	@Test
-	void testRemoveFavorites() {
-		
-	}
+	void testUpdateFavoritesExcep() {
+		when(bindingResult.hasErrors()).thenReturn(true);
+		WishListException exc = Assertions.assertThrows(WishListException.class, ()->controller.updateFavorites(requestWishlist,bindingResult));
 
+	}
+	@Test
+	void testRemoveFavorites() {
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(modelMapper.map(requestWishlist, WhislistDTO.class)).thenReturn(whislistDTO);
+
+		controller.removeFavorites(requestWishlist,bindingResult);
+	}
+	@Test
+	void testRemoveFavoritesExcep() {
+		when(bindingResult.hasErrors()).thenReturn(true);
+		WishListException exc = Assertions.assertThrows(WishListException.class, ()->controller.removeFavorites(requestWishlist,bindingResult));
+	}
 }
