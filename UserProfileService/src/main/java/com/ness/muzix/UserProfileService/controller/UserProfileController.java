@@ -40,7 +40,7 @@ public class UserProfileController {
 	
 	@PostMapping("/updateUserProfile")
 	@Operation(summary = "Muzix Userprofile Service", description = "Updates user profile in muzix app DB.")
-	public ResponseEntity<String> loginProfile(@RequestBody UserProfileResponse userProfile) throws UserProfileException {
+	public ResponseEntity<String> updateUserProfile(@RequestBody UserProfileResponse userProfile) throws UserProfileException {
 		return new ResponseEntity<String>(userProfileService.updateProfile(userProfile),HttpStatus.OK);
 	}
 	
